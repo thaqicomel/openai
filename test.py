@@ -50,14 +50,18 @@ else:
     st.write("Get personalized career suggestions based on your interests and strengths.")
 
 # Get user input
-    user_info = st.text_input("What subjects do you like in school that you think you do reasonably well (or at least above average) at the same time? Explain why in less than 20 words:")
+    with st.form(key="career_suggestion_form"):
+        # User input for subjects and interests
+        user_info = st.text_input("What subjects do you like in school that you think you do reasonably well (or at least above average) at the same time? Explain why in less than 20 words:")
 
-    if st.button("Get Career Suggestions"):
-         if user_info:
-        # Call function and get suggestions
-             suggestions = course_match_bot(user_info,openai_api_key)
-        # Display the output
-         st.write("Here are some courses that I may suggest for you:")
-         st.write(suggestions)
-    else:
-        st.warning("Please enter your interests and strengths to get suggestions.")
+        # Automatically submit the form when pressing Enter
+        submit_button = st.form_submit_button(label="Get Career Suggestions")
+
+        if submit_button:
+            # Generate career suggestions if input is provided
+            if user_info:
+                suggestions = course_match_bot(user_info, openai_api_key)
+                st.write("Here are some courses that I may suggest for you:")
+                st.write(suggestions)
+            else:
+                st.warning("Please enter dulu")
