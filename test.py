@@ -2,9 +2,10 @@ import streamlit as st
 from openai import OpenAI
 
 
-client = OpenAI(api_key="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")
+# client = OpenAI(api_key="")
 
-def course_match_bot(user_info):
+def course_match_bot(user_info,openai_api_key):
+    client = OpenAI(api_key=openai_api_key)
     # Ask Question
     # user_info = input("What subjects do you like in school that you think you do reasonably well (or at least above average) at the same time? Explain why in less than 20 words: ")
 
@@ -41,18 +42,22 @@ def course_match_bot(user_info):
 # course_match_bot()
 
 #streamlit application
-st.title("Course Match Bot")
-st.write("Get personalized career suggestions based on your interests and strengths.")
+st.title("💬Course Match Bot")
+openai_api_key = st.text_input("OpenAI API Key", type="password")
+if not openai_api_key:
+    st.info("Please add your OpenAI API key to continue.", icon="🗝️")
+else:
+    st.write("Get personalized career suggestions based on your interests and strengths.")
 
 # Get user input
-user_info = st.text_input("What subjects do you like in school that you think you do reasonably well (or at least above average) at the same time? Explain why in less than 20 words:")
+    user_info = st.text_input("What subjects do you like in school that you think you do reasonably well (or at least above average) at the same time? Explain why in less than 20 words:")
 
-if st.button("Get Career Suggestions"):
-    if user_info:
+    if st.button("Get Career Suggestions"):
+         if user_info:
         # Call function and get suggestions
-        suggestions = course_match_bot(user_info)
+             suggestions = course_match_bot(user_info,openai_api_key)
         # Display the output
-        st.write("Here are some courses that I may suggest for you:")
-        st.write(suggestions)
+         st.write("Here are some courses that I may suggest for you:")
+         st.write(suggestions)
     else:
         st.warning("Please enter your interests and strengths to get suggestions.")
