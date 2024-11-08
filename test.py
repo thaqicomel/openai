@@ -12,7 +12,7 @@ def course_match_bot(user_info,openai_api_key):
     # #generate prompt dari user
     prompt = f"Suggest at least 5 career choices based on this: {user_info}. For each career, provide a brief description more than 55 words explaining why it fits well."
 
-    #Print output(this is where the work begin)
+    #Print output
     completion = client.chat.completions.create(
         model="gpt-4-turbo",
         messages=[
