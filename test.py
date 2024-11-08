@@ -2,7 +2,7 @@ import streamlit as st
 from openai import OpenAI
 
 
-client = OpenAI(api_key="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")
+client = OpenAI(api_key="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")
 
 def course_match_bot(user_info):
     # Ask Question
